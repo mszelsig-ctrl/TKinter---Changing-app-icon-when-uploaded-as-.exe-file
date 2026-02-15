@@ -1,7 +1,3 @@
-# This is the intellectual property of the user " looptower1234 ", also known as " looptower " or " loop ".
-# This code is for personal use only, and any and all pieces of code or any other data which may be considered intellectual property is under the ownership, trademark and copyright of the persona " looptwer1234 ".
-# For further terms and conditions of usage, please directly contact the owner.
-
 import tkinter as tk
 import winsound
 from tkinter import WORD
@@ -36,7 +32,6 @@ def show_splash():
     splash.attributes("-alpha", 0.0)
     splash.configure(bg=BG_COLOR)
 
-    # Window size
     w, h = 420, 260
     sw = splash.winfo_screenwidth()
     sh = splash.winfo_screenheight()
@@ -47,9 +42,6 @@ def show_splash():
     canvas = tk.Canvas(splash, width=w, height=h, highlightthickness=0, bg=BG_COLOR)
     canvas.pack()
 
-    # ============================================================
-    # 1. LOAD + SCALE EMBLEM TO ~150px TALL
-    # ============================================================
     try:
         emblem = Image.open(resource_path("RMPLOGO1.png"))
         scale_factor = 150 / emblem.height
@@ -63,24 +55,20 @@ def show_splash():
         new_w = 150
         new_h = 150
 
-    # Emblem placement (slightly above center)
     emblem_x = w // 2
     emblem_y = h // 2 - 40
 
-
-    # 2. DEEP RED NEON OUTLINE
 
     neon_radius = new_h // 2 + 8
     canvas.create_oval(
         emblem_x - neon_radius, emblem_y - neon_radius,
         emblem_x + neon_radius, emblem_y + neon_radius,
-        outline="#8A0018",  # deep tactical red
+        outline="#8A0018", 
         width=4,
         tags="neon"
     )
 
 
-    # 3. HALO GLOW (SOFT AURA)
 
     halo_colors = [
         "#3A0008", "#4A000A", "#5A000C", "#6A000E",
@@ -96,9 +84,8 @@ def show_splash():
         )
 
 
-    # 4. DRAW EMBLEM (FOREGROUND)
     if emblem_img:
-        splash.emblem_img = emblem_img  # prevent garbage collection
+        splash.emblem_img = emblem_img 
         canvas.create_image(emblem_x, emblem_y, image=splash.emblem_img, tags="emblem")
     else:
         canvas.create_text(
@@ -109,7 +96,6 @@ def show_splash():
             tags="emblem"
         )
 
-    # 5. TACTICAL PULSING GLOW (START AFTER EMBLEM EXISTS)
     pulse_colors = ["#4A000A", "#5A000C", "#6A000E", "#5A000C", "#4A000A"]
     pulse_index = 0
 
@@ -127,7 +113,6 @@ def show_splash():
             tags="pulse"
         )
 
-        # Keep pulse behind everything
         canvas.tag_lower("pulse", "halo")
         canvas.tag_lower("pulse", "neon")
         canvas.tag_lower("pulse", "emblem")
@@ -137,10 +122,9 @@ def show_splash():
 
     pulse()
 
-    # 6. TEXT BELOW EMBLEM
     canvas.create_text(
         w/2, h/2 + 60,
-        text="[UBA-RMP]\nVirtual Tryout Guide",
+        text="[___]\nVirtual Tryout Guide",
         fill=FG_COLOR,
         font=("Times", 22, "bold"),
         justify="center",
@@ -149,7 +133,6 @@ def show_splash():
 
     play_splash_sound(resource_path("splash_sound.wav"))
 
-    # FADE IN
     for i in range(0, 11):
         splash.attributes("-alpha", i / 10)
         splash.update()
@@ -157,7 +140,6 @@ def show_splash():
 
     splash.after(1500)
 
-    # FADE OUT
     for i in range(10, -1, -1):
         splash.attributes("-alpha", i / 10)
         splash.update()
@@ -174,71 +156,68 @@ def open_google_doc():
     webbrowser.open("https://docs.google.com/document/d/1-M482TIJ4udg3N6T_Eds-lFKcf_37nx1OV9yvQB72UM/edit?tab=t.0")
 
 
-# ---------- CONFIG ----------
-
 BG_COLOR = "#9B1C31"
 FG_COLOR = "white"
 FONT_MAIN = ("Times", 20, "bold")
 FONT_LABEL = ("Times", 16, "bold")
 
-# ---------- PAGE CONTENT ----------
 
 PAGES = [
-    "For [RMP] Tryout Guide: Click [Next Page] to Begin.",
-    "Hello, I am Major looptower1234 and I will be your tryout host today. You will address me as Instructor or INS only, is that understood Cadet?",
-    "Here are the rules for this RMP Tryout. If you do not follow them, you will receive a strike;",
-    "You will be referred to as Cadet throughout this tryout.",
-    "There will also be a 3-strike system, after receiving 3 strikes you will automatically be dismissed.",
-    "PTS is active, and speaking out of PTS will result in a Strike.",
-    "The format for asking PTS is,'PTS, Instructor (or INS)?'",
-    "You are to follow all commands, or you will be given a Strike.",
-    "Grammar is also required, and if you do not use it you will be given a Strike.",
-    "Any form of trolling will not be tolerated throughout this tryout and whilst you're in RMP.",
-    "Am I understood, Cadet?",
-    "Welcome to the Physical Part of this tryout, when you finish the JJ's, GJ's and HG's, you will say ",
-    "“Done, Instructor (or INS).”",
-    "You will have 20 minutes to complete the Physical part of this tryout, and if you fail, you will ",
-    "recieve 2 strikes.\nCadet, do you know how to perform your JJ's, GJ's and HJ's?",
-    "Alright, Jumping Jacks (JJ's) are performed like this;\nONE\nTWO\nTHREE",
-    "Grammar Jacks (GG's) are performed like this;\nOne.\nTwo.\nThree.",
-    "Hell Jacks (HJ's) are performed like this;\nO\nN\nE\nONE\nIs that understood, Cadet?",
-    "You will now all do 70JJ's, Begein!",
-    "You will now all do 15GJ's, Begin!",
-    "You will now all do 5HJ's, Begin!",
-    "Welcome to the Drill section of this tryout, where you will be tested on your ability to perform Drill Movements.",
-    "Do we all know our drills (turns/faces)?",
-    "In that case, we will begin;",
-    "Left, Turn!",
-    "Left, Incline!",
-    "Right, Turn!",
-    "Right, Incline!",
-    "About, Turn!",
-    "Control, Eye!",
-    "Left, Turn!",
-    "Centre, Turn!",
-    "SFL,",
-    "Prepare,",
-    "Forwards,",
-    "Ready,",
-    "Kick,",
-    "March!",
-    "Welcome to the Knowledge phase of this tryout, where you will learn about the duties and rules within the Royal Military Police."
-    "Screenshot everything down and when you have, say Done.",
-    "Are you ready, Cadet?",
-    "Instruction Brigade - The Instruction Brigade is the regiment’s instructors, in-charge with overseeing the training of our members. .",
-    "Close Protection Unit - Close Protection Unit - CPU is RMP’s Elite Guarding Brigade. They are specialized in providing protection to High Ranking Members in UBA, neutralizing raiders, and protecting key personnel. ",
-    "Adjutant General’s Corps - AGC is RMP’s Operations and Drills Brigade. They specialized in hosting Tactical Operations and realistic Drills, bringing realism into RMP.",
-    "Attending the Weekly Inspections happening on Saturdays is Mandatory, and not attending it without a valid reason will result in 2 RMP strikes.",
-    "Make sure to always check your pings in the RMP & UBA servers for important information and events.",
-    "To discharge from RMP, you must serve 2 weeks without LoA. (Leave of Absence) ",
-    "To discharge from a Brigade, you must serve 1 week without LoA. (Leave of Absence) ",
-    "Leaving before the 2 weeks are up will result in a blacklist from RMP for Leaving Without a Discharge (LWD), and the rank of Private will be given in UBA. ",
-    "The Commanding General of RMP is currently TBNRfragsandjoinFire",
-    "The RMP nickname: Redcaps",
-    "The RMP Motto is: “Exemplo Ducemus”, which is “By Example We Shall Lead.” in English. ",
-    "Do not use cuffs unless you are allowed to, always check the Cuff Regulations Document before using cuffs or ask a member of RMP HICOMM if you are unsure on when to use your cuffs.",
-    "Welcome to the Quiz section of this Tryout. You are required to get 6/8 to pass this tryout. You will have 15 minutes to complete the quiz. Good luck. ",
-    "Ping me in the main UBA Discorn and I will send you the Questions in DMs."
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".?",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    ".",
+    "."
 ]
 
 NUM_PAGES = len(PAGES)
@@ -620,4 +599,5 @@ window1.config(menu=menubar)
 
 
 show_page(1)
+
 window1.mainloop()
